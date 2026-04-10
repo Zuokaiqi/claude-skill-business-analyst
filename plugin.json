@@ -1,0 +1,44 @@
+{
+  "name": "business-analyst",
+  "version": "1.1.0",
+  "description": "面向决策者的商业分析师 skill。强制业务背景对齐、可被推翻的假设、小样本警告、时间归因检查、诚实的不确定性标注，输出深色主题 PDF 报告。",
+  "author": {
+    "name": "Zuojuzhang",
+    "email": "12341071+Zuojuzhang@user.noreply.gitee.com",
+    "url": "https://github.com/Zuokaiqi"
+  },
+  "homepage": "https://github.com/Zuokaiqi/claude-skill-business-analyst",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zuokaiqi/claude-skill-business-analyst.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "business-analyst",
+    "business-analysis",
+    "data-analysis",
+    "roi",
+    "decision-support",
+    "pdf-report",
+    "chinese",
+    "商业分析",
+    "商业分析师",
+    "数据分析"
+  ],
+  "skills": [
+    "./skills/business-analyst"
+  ],
+  "requirements": {
+    "python": ">=3.9",
+    "pip": [
+      "pandas>=2.0",
+      "openpyxl>=3.1",
+      "matplotlib>=3.7",
+      "seaborn>=0.12",
+      "fpdf2>=2.7"
+    ]
+  },
+  "compatibility": {
+    "claude-code": ">=1.0.0"
+  }
+}

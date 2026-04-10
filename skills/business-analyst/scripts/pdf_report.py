@@ -10,7 +10,7 @@
 
     import sys
     from pathlib import Path
-    sys.path.insert(0, str(Path.home() / '.claude' / 'skills' / 'data-analysis' / 'scripts'))
+    sys.path.insert(0, str(Path.home() / '.claude' / 'skills' / 'business-analyst' / 'scripts'))
     from pdf_report import Report
 
     r = Report(title='2026 Q1 渠道 ROI 分析', subtitle='2026-01-01 ~ 2026-03-31')

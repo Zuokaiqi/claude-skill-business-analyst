@@ -1,8 +1,15 @@
 __pycache__/
 *.py[cod]
+*.pyc
+*.pyo
 *.egg-info/
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
 *.log
+*.swp
+*.swo
+.env
+.venv/
+venv/

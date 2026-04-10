@@ -1,6 +1,6 @@
 ---
-name: data-analysis
-description: 面向决策的商业数据分析技能。当用户提到数据分析、分析数据、商业分析、策略分析、ROI分析、投放效果、效率评估、优化建议、看数据、分析表格等关键词时触发。支持 Excel/CSV/文本数据输入，输出包含 Actionable Insight、Key Metrics、可视化图表的专业分析报告。即使用户只是说"帮我看看这个数据"或"分析一下这个表"，也应当使用此技能。
+name: business-analyst
+description: 面向决策者的商业分析师 skill。当用户提到数据分析、分析数据、商业分析、策略分析、ROI分析、投放效果、效率评估、优化建议、看数据、分析表格等关键词时触发。支持 Excel/CSV/文本数据输入，输出包含 Actionable Insight、Key Metrics、可视化图表的专业分析报告。即使用户只是说"帮我看看这个数据"或"分析一下这个表"，也应当使用此技能。
 ---
 
 # 商业数据分析
@@ -162,7 +162,7 @@ import sys
 from pathlib import Path
 
 # 跨平台定位 skill 的 scripts 目录（Windows / macOS / Linux 通用）
-_scripts = Path.home() / '.claude' / 'skills' / 'data-analysis' / 'scripts'
+_scripts = Path.home() / '.claude' / 'skills' / 'business-analyst' / 'scripts'
 sys.path.insert(0, str(_scripts))
 
 from chart_style import (

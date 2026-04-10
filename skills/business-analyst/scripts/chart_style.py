@@ -5,7 +5,7 @@
 
     import sys
     from pathlib import Path
-    sys.path.insert(0, str(Path.home() / '.claude' / 'skills' / 'data-analysis' / 'scripts'))
+    sys.path.insert(0, str(Path.home() / '.claude' / 'skills' / 'business-analyst' / 'scripts'))
     from chart_style import apply_style, save_chart, COLOR_PRIMARY, COLOR_SECONDARY, PALETTE
     apply_style('dark')   # 深色，与 PDF 报告一致；嵌入 PDF 时必须用这个
 
