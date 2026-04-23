@@ -20,8 +20,8 @@
 - **可被推翻的假设**：分析前提出 2-3 个可被数据证伪的商业假设，避免"先看答案再编题"
 - **分析纪律内置**：时间归因检查、小样本警告、边际递减意识、归因公平性、绝对量 vs 比率、反面检验
 - **诚实的不确定性标注**：区分【数据直接支撑】/【推断】/【数据不足】三层结论
-- **PDF 报告输出**：使用 `fpdf2` 生成深色主题 PDF，图表内嵌、中文字体支持
-- **统一可视化风格**：粉/蓝主色调的 matplotlib + seaborn 配色方案
+- **PDF 渲染链路**：Playwright + Paged.js 渲染HTML/CSS为PDF，负责分页、页眉页脚、CJK字体，详见`references/pdf_rendering.md`
+- **5套场景报告模板**：`references/templates/`下预置渠道ROI、转化漏斗、留存、AB实验、定价五套模板，视觉风格由执行方按场景判断
 
 ## 触发场景
 
@@ -56,17 +56,13 @@ claude plugin install Zuokaiqi/claude-skill-business-analyst
 
 ## 依赖
 
-skill 需要在 Python 环境中安装以下库：
+数据处理的Python环境：
 
 ```bash
-pip install pandas openpyxl matplotlib seaborn fpdf2
+pip install pandas openpyxl
 ```
 
-中文 PDF 字体（`fpdf2` 需要）：
-
-- **Windows**：自动使用系统自带的微软雅黑（`msyh.ttc`）
-- **macOS**：建议安装 `PingFang.ttc` 或将 `STHeiti Light.ttc` 路径配置到 skill 中
-- **Linux**：建议安装 `fonts-noto-cjk`，字体路径通常为 `/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc`
+PDF渲染默认走Playwright + Paged.js链路，具体安装步骤和CJK字体要求见`references/pdf_rendering.md`。执行方也可以选用其他渲染工具（weasyprint、reportlab、KIMI/Claude自带PDF能力等），只要能解决A4分页、页眉页脚页码、CJK字体三件事即可。
 
 ## 快速开始
 
@@ -78,23 +74,9 @@ skill 会自动触发，并按工作流先反问你 2-3 个业务背景问题（
 
 **不要期待它读完文件就直接出报告**——这是 feature 不是 bug。如果你已经在第一句话里说清了业务背景，它会跳过追问直接进入假设阶段。
 
-## 报告示例
+## 报告结构
 
-skill 输出的 PDF 报告包含以下结构：
-
-```
-封面（粉色色块 + Key Metrics 卡片）
-├── 商业假设（标明哪些成立、哪些被推翻）
-├── Actionable Insight（3-5 句话决策摘要）
-├── 分析维度 1 …… N（每个维度独立分页）
-│   ├── 对应假设
-│   ├── 核心发现 + 具体数字
-│   ├── 数据局限标注
-│   └── → 建议动作 + 风险提示
-├── Key Metrics（4 个核心指标卡片）
-├── 分析局限性（诚实说明本次分析的边界）
-└── References（数据来源、时间范围）
-```
+报告结构由阶段一锁定的模板决定。5套模板（渠道ROI、转化漏斗、留存、AB实验、定价）都包含公共锚点章节：商业假设、Actionable Insight、分析局限性、References；场景特有章节和推荐指标由模板文件自己定义，具体参见`references/templates/`。
 
 ## 与"普通数据分析 prompt"的差别
 
@@ -111,17 +93,24 @@ skill 输出的 PDF 报告包含以下结构：
 
 ```
 business-analyst/
-├── SKILL.md                       # 主 prompt（角色 + 工作流 + 报告结构）
+├── SKILL.md                       # 主 prompt（角色 + 工作流 + 阶段一模板选择）
 ├── references/
-│   ├── report_style.md           # PDF 报告深色主题样式规范
-│   └── report_examples.md        # 好/差分析对比示例
-└── scripts/
-    └── chart_style.py            # matplotlib/seaborn 配色与样式函数
+│   ├── pdf_rendering.md          # PDF 渲染技术路径（Playwright + Paged.js）
+│   ├── report_examples.md        # 好/差分析对比示例
+│   └── templates/                # 5 套报告模板
+│       ├── channel_roi.md
+│       ├── funnel_conversion.md
+│       ├── retention.md
+│       ├── ab_test.md
+│       └── pricing.md
+└── scripts/                       # 历史辅助脚本，非默认执行路径
+    ├── chart_style.py
+    └── pdf_report.py
 ```
 
 ## 给其他 Agent 使用
 
-如果你想把这个 skill 用在 **非 Claude 体系**的 Agent 上（Kimi、GPT、自建 LangChain 等），可以将 `SKILL.md` + `references/*.md` + `scripts/chart_style.py` 拼接成一个完整的 system prompt 直接喂给目标模型。该 skill 的 99% 价值在 prompt 而非代码，几乎不依赖 Claude harness 的特殊机制。
+如果你想把这个 skill 用在 **非 Claude 体系**的 Agent 上（Kimi、GPT、自建 LangChain 等），将 `SKILL.md` + `references/*.md` + `references/templates/*.md` 拼接成一个完整的 system prompt 喂给目标模型即可。该 skill 的价值在 prompt 而非代码，几乎不依赖 Claude harness 的特殊机制。
 
 ## License
 

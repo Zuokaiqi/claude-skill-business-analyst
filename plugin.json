@@ -1,7 +1,7 @@
 {
   "name": "business-analyst",
-  "version": "1.1.0",
-  "description": "面向决策者的商业分析师 skill。强制业务背景对齐、可被推翻的假设、小样本警告、时间归因检查、诚实的不确定性标注，输出深色主题 PDF 报告。",
+  "version": "3.0.0",
+  "description": "商业数据分析师skill，面向决策者输出结构化分析报告。包含业务背景确认、商业假设验证、分析纪律检查、5套场景报告模板（渠道ROI、漏斗转化、留存、AB实验、定价），并生成PDF报告。",
   "author": {
     "name": "Zuojuzhang",
     "email": "12341071+Zuojuzhang@user.noreply.gitee.com",
@@ -32,10 +32,7 @@
     "python": ">=3.9",
     "pip": [
       "pandas>=2.0",
-      "openpyxl>=3.1",
-      "matplotlib>=3.7",
-      "seaborn>=0.12",
-      "fpdf2>=2.7"
+      "openpyxl>=3.1"
     ]
   },
   "compatibility": {

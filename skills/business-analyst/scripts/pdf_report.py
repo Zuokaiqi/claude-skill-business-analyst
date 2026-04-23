@@ -1,8 +1,8 @@
 """
 数据分析技能 - PDF 报告生成器
 
-把 references/report_style.md 的样式规范固化为可调用的 API，
-避免每次会话都要重新发明 fpdf2 的中文字体注册、卡片布局、表格交替色等。
+历史版本的PDF渲染封装。v3起默认路径切换到Playwright+Paged.js，
+本脚本保留供需要fpdf2的执行环境作为可选参考。
 
 依赖: fpdf2 (>=2.7), pillow
 

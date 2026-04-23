@@ -15,4 +15,6 @@
 - KIMI：使用自带的PDF生成能力
 - 通用Python环境：reportlab、weasyprint、matplotlib+PIL拼图等方案都可以
 
-版式和配色规范统一参考`../references/report_style.md`，不论使用哪种工具，输出效果应与规范保持一致。
+视觉规范已从skill中移除，视觉由执行方按场景自行决定。默认PDF渲染链路见`../references/pdf_rendering.md`，报告结构模板见`../references/templates/`。
+
+`chart_style.py`的6套主题常量无外部文档依赖，仅作为需要matplotlib配色起点的执行方的参考代码。`pdf_report.py`同样是fpdf2时代的历史封装。两者均不参与v3默认渲染链路，不维护、不保证向前兼容。
